@@ -33,19 +33,22 @@ const TodoItem = ({ id, done, text }) => {
 
   const handleDoneClick = () => {
     setIsChecked(!isChecked);
-    let patchData = { "done": isChecked };
+  }
 
+  // useEffect를 썻음에도 계속 렌더링됨
+  useEffect(() => {
     fetch(`http://localhost:3001/todos/${id}`, {
       method: "PATCH",
       headers: { "Content-type": "Application/json" },
-      body: JSON.stringify(patchData)
+      body: JSON.stringify({ done: isChecked })
     })
       .then(() => {
-        console.log(patchData, id, done)
-        // window.location.reload();
+        console.log(isChecked)
       })
       .catch(error => console.log(error))
-  }
+  }, [isChecked])
+
+
   const handleDeleteBtn = (e) => {
     fetch(`http://localhost:3001/todos/${id}`, {
       method: "DELETE"
@@ -57,7 +60,6 @@ const TodoItem = ({ id, done, text }) => {
     <div>
       <FontAwesomeIcon icon={faSquareCheck}
         className={isChecked ? "isChecked" : ""}
-        // done={done ? 1 : 0}
         onClick={handleDoneClick} />
       <span>{text}</span>
     </div>
