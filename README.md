@@ -5,11 +5,11 @@ todo Item 생성
 
 ## Read
 json server 라이브러리 구동
-todo Item Read
+todo Item 읽기
 
 ## Update
-todo Item check : 구현
-todo Item 수정 : 구현 전
+todo Item check
+todo Item 수정
 
 ## Delete
 todo Item 삭제
