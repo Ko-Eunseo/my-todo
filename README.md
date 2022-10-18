@@ -8,7 +8,7 @@ json server 라이브러리 구동
 todo Item Read
 
 ## Update
-todo Item check : 구현중
+todo Item check : 구현
 todo Item 수정 : 구현 전
 
 ## Delete
