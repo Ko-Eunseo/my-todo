@@ -30,12 +30,13 @@ padding: 4px;
 
 const TodoItem = ({ id, done, text }) => {
   const [isChecked, setIsChecked] = useState(done);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editText, setEditText] = useState(text);
 
   const handleDoneClick = () => {
     setIsChecked(!isChecked);
   }
 
-  // useEffect를 썻음에도 계속 렌더링됨
   useEffect(() => {
     fetch(`http://localhost:3001/todos/${id}`, {
       method: "PATCH",
@@ -56,15 +57,35 @@ const TodoItem = ({ id, done, text }) => {
       .catch(err => console.log(err))
   }
 
+  const handleEditBtn = (e) => {
+    setIsEdit(!isEdit)
+  }
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/todos/${id}`, {
+      method: "PATCH",
+      headers: { "Content-type": "Application/json" },
+      body: JSON.stringify({ text: editText })
+    }).then(() => console.log(isEdit))
+      .catch(err => console.log(err))
+  }, [isEdit])
+
+  const onChange = e => setEditText(e.target.value);
+
   return <List>
     <div>
       <FontAwesomeIcon icon={faSquareCheck}
         className={isChecked ? "isChecked" : ""}
         onClick={handleDoneClick} />
-      <span>{text}</span>
+      {isEdit ?
+        <input value={editText} onChange={onChange} />
+        : <span>{editText}</span>}
+
     </div>
     <div>
-      <FontAwesomeIcon icon={faPenNib} />
+      <FontAwesomeIcon icon={faPenNib}
+        onClick={handleEditBtn}
+      />
       <FontAwesomeIcon icon={faCircleXmark} className="deleteBtn"
         onClick={handleDeleteBtn} />
     </div>
