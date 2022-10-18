@@ -16,6 +16,7 @@ padding: 8px 16px;
 border: 10px solid #FBDE8B;
 border-bottom: 30px solid #FBDE8B;
 border-radius: 10px;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `
 function App() {
 

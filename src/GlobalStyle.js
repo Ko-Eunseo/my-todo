@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
 }
 body {
   font-family: 'Bowlby One', 'Cafe24Ohsquare';
+  background-color: #989898;
 }
 button {
   cursor: pointer;
